@@ -2,7 +2,8 @@
 <resources>
 
     <string name="app_name">Meetings Shortener</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="menu_settings">Settings</string>
+    <string name="person_count">How many people?</string>
+    <string name="avg_hour_cost">Average hour cost / person</string>
+    <string name="submit_button">Start meeting</string>
 
 </resources>

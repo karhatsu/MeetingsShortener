@@ -4,11 +4,24 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity" >
 
-    <TextView
+    <EditText
+        android:id="@+id/person_count"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/person_count"
+        android:inputType="numberSigned" />
+    <EditText
+        android:id="@+id/avg_hour_cost"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/person_count"
+        android:hint="@string/avg_hour_cost"
+        android:inputType="numberSigned" />
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="@string/hello_world" />
-
+        android:layout_below="@id/avg_hour_cost"
+        android:onClick="showCounter"
+        android:text="@string/submit_button"/>
+    
 </RelativeLayout>
