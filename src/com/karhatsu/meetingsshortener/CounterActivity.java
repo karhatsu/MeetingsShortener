@@ -14,6 +14,7 @@ public class CounterActivity extends Activity {
 	public static final String EXTRA_PERSON_COUNT = "com.karhatsu.meetingsshortener.CounterActivity.personCount";
 	public static final String EXTRA_HOUR_COST = "com.karhatsu.meetingsshortener.CounterActivity.hourCost";
 	public static final String EXTRA_START_TIME = "com.karhatsu.meetingsshortener.CounterActivity.startTime";
+	public static final String EXTRA_CURRENCY = "com.karhatsu.meetingsshortener.CounterActivity.currency";
 
 	private TimerTask timerTask;
 	private Timer timer = new Timer();
@@ -42,7 +43,7 @@ public class CounterActivity extends Activity {
 
 	private void updateCounterValue() {
 		TextView counter = (TextView) findViewById(R.id.counter);
-		counter.setText(formatMoney(getMoneySpent()) + " EUR");
+		counter.setText(formatMoney(getMoneySpent()) + " " + getCurrency());
 	}
 
 	private String formatMoney(double moneySpent) {
@@ -67,5 +68,9 @@ public class CounterActivity extends Activity {
 
 	private Date getStartTime() {
 		return (Date) getIntent().getSerializableExtra(EXTRA_START_TIME);
+	}
+
+	private String getCurrency() {
+		return getIntent().getStringExtra(EXTRA_CURRENCY);
 	}
 }

@@ -21,6 +21,7 @@ public class MainActivity extends Activity {
 		intent.putExtra(CounterActivity.EXTRA_PERSON_COUNT, getPersonCount());
 		intent.putExtra(CounterActivity.EXTRA_HOUR_COST, getAvgHourCost());
 		intent.putExtra(CounterActivity.EXTRA_START_TIME, new Date());
+		intent.putExtra(CounterActivity.EXTRA_CURRENCY, getCurrency());
 		startActivity(intent);
 	}
 
@@ -35,6 +36,10 @@ public class MainActivity extends Activity {
 	private int getIntFromField(int resourceId) {
 		EditText avgHourCostField = (EditText) findViewById(resourceId);
 		return Integer.parseInt(avgHourCostField.getText().toString());
+	}
+
+	private String getCurrency() {
+		return ((EditText) findViewById(R.id.currency)).getText().toString();
 	}
 
 }

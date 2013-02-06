@@ -17,10 +17,18 @@
         android:layout_below="@id/person_count"
         android:hint="@string/avg_hour_cost"
         android:inputType="numberSigned" />
-    <Button
+    <EditText
+        android:id="@+id/currency"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/avg_hour_cost"
+        android:hint="@string/currency"
+        android:inputType="textCapCharacters"
+        android:text="@string/default_currency" />
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/currency"
         android:onClick="showCounter"
         android:text="@string/submit_button"/>
     
