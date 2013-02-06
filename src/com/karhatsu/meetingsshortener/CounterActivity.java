@@ -1,7 +1,10 @@
 package com.karhatsu.meetingsshortener;
 
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -11,6 +14,9 @@ public class CounterActivity extends Activity {
 	public static final String EXTRA_HOUR_COST = "com.karhatsu.meetingsshortener.CounterActivity.hourCost";
 	public static final String EXTRA_START_TIME = "com.karhatsu.meetingsshortener.CounterActivity.startTime";
 
+	private TimerTask timerTask;
+	private Timer timer = new Timer();
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -19,14 +25,35 @@ public class CounterActivity extends Activity {
 	}
 
 	private void setupCounter() {
-		TextView counter = (TextView) findViewById(R.id.counter);
-		counter.setText(getMoneySpent() + " EUR");
+		timerTask = new TimerTask() {
+			@Override
+			public void run() {
+				runOnUiThread(new Runnable() {
+					@Override
+					public void run() {
+						updateCounterValue();
+					}
+				});
+			}
+		};
+		timer.schedule(timerTask, 1000, 1000);
 	}
 
-	private double getMoneySpent() {
-		Intent intent = getIntent();
-		int personCount = intent.getIntExtra(EXTRA_PERSON_COUNT, 0);
-		int avgHourCost = intent.getIntExtra(EXTRA_HOUR_COST, 0);
-		return personCount * avgHourCost;
+	private void updateCounterValue() {
+		TextView counter = (TextView) findViewById(R.id.counter);
+		counter.setText(Calculator.getMoneySpent(getPersonCount(),
+				getAvgHourCost(), getStartTime()) + " EUR");
+	}
+
+	private int getPersonCount() {
+		return getIntent().getIntExtra(EXTRA_PERSON_COUNT, 0);
+	}
+
+	private int getAvgHourCost() {
+		return getIntent().getIntExtra(EXTRA_HOUR_COST, 0);
+	}
+
+	private Date getStartTime() {
+		return (Date) getIntent().getSerializableExtra(EXTRA_START_TIME);
 	}
 }
