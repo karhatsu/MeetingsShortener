@@ -1,5 +1,6 @@
 package com.karhatsu.meetingsshortener;
 
+import java.text.NumberFormat;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -41,8 +42,19 @@ public class CounterActivity extends Activity {
 
 	private void updateCounterValue() {
 		TextView counter = (TextView) findViewById(R.id.counter);
-		counter.setText(Calculator.getMoneySpent(getPersonCount(),
-				getAvgHourCost(), getStartTime()) + " EUR");
+		counter.setText(formatMoney(getMoneySpent()) + " EUR");
+	}
+
+	private String formatMoney(double moneySpent) {
+		NumberFormat numberInstance = NumberFormat.getNumberInstance();
+		numberInstance.setMaximumFractionDigits(2);
+		numberInstance.setMinimumFractionDigits(2);
+		return numberInstance.format(moneySpent);
+	}
+
+	private double getMoneySpent() {
+		return Calculator.getMoneySpent(getPersonCount(), getAvgHourCost(),
+				getStartTime());
 	}
 
 	private int getPersonCount() {
